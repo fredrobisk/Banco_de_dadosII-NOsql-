@@ -31,33 +31,6 @@ Relacionamentos:
 ![Modelo Conceitual](Modelo%20conceitual.png)
 
 
-## Modelo ER
-
-```mermaid
-erDiagram
-    ORGANIZADOR ||--o{ EVENTO : "organiza (1:N)"
-    EVENTO }o--o{ PALESTRANTE : "possui_palestrantes (N:N)"
-
-    ORGANIZADOR {
-        int id_organizador PK
-        string nome_organizador
-        string email
-    }
-
-    EVENTO {
-        int id_evento PK
-        string nome_evento
-        string area
-        date data_evento
-    }
-
-    PALESTRANTE {
-        int id_palestrante PK
-        string nome_palestrante
-        string especialidade
-    }
-```
-
 ## Executar MongoDB com Docker
 
 Esta seção mostra os comandos para executar o MongoDB usando Docker. Para a apresentação, o objetivo é deixar o MongoDB rodando e depois abrir o `mongosh` para colar os comandos das versões embedded e referenced.
