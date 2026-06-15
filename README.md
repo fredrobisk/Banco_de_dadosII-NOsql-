@@ -1,8 +1,8 @@
 # Sistema de Eventos Academicos - MongoDB
 
-Este trabalho modela uma base de dados para armazenar eventos academicos, seus organizadores e seus palestrantes.
+Este trabalho modela uma base de dados para armazenar eventos acadêmicos, seus organizadores e seus palestrantes.
 
-O modelo possui tres entidades:
+O modelo possui três entidades:
 
 - `ORGANIZADOR`
 - `EVENTO`
@@ -10,19 +10,19 @@ O modelo possui tres entidades:
 
 Relacionamentos:
 
-- `ORGANIZADOR 1:N EVENTO`: um organizador pode organizar varios eventos, e cada evento pertence a um organizador.
-- `EVENTO N:N PALESTRANTE`: um evento pode ter varios palestrantes, e um palestrante pode participar de varios eventos.
+- `ORGANIZADOR 1:N EVENTO`: um organizador pode organizar vários eventos, e cada evento pertence a um organizador.
+- `EVENTO N:N PALESTRANTE`: um evento pode ter vários palestrantes e um palestrante pode participar de vários eventos.
 
 ## Checklist do enunciado
 
 - Modelo ER com 3 entidades.
 - Pelo menos um relacionamento `1:N`.
 - Pelo menos um relacionamento `N:N`.
-- Versao 1 usando `Embedded Relationships`.
-- Versao 2 usando `Referenced Relationships`.
-- Insercao de dados nas duas versoes.
-- Duas consultas para cada versao.
-- Todas as consultas envolvem pelo menos duas entidades e possuem restricao.
+- Versão 1 usando `Embedded Relationships`.
+- Versão 2 usando `Referenced Relationships`.
+- Inserção de dados nas duas versões.
+- Duas consultas para cada versão.
+- Todas as consultas envolvem pelo menos duas entidades e possuem restrição.
 - Pelo menos uma consulta considera o relacionamento `N:N`.
 
 ## Modelo ER
@@ -54,7 +54,7 @@ erDiagram
 
 ## Executar MongoDB com Docker
 
-Esta secao mostra os comandos para executar o MongoDB usando Docker. Para a apresentacao, o objetivo e deixar o MongoDB rodando e depois abrir o `mongosh` para colar os comandos das versoes embedded e referenced.
+Esta seção mostra os comandos para executar o MongoDB usando Docker. Para a apresentação, o objetivo é deixar o MongoDB rodando e depois abrir o `mongosh` para colar os comandos das versões embedded e referenced.
 
 ### Verificar se o Docker esta funcionando
 
@@ -68,7 +68,7 @@ docker --version
 docker ps
 ```
 
-Se `docker ps` executar sem erro, o Docker esta pronto.
+Se `docker ps` executar sem erro, o Docker está pronto.
 
 ### Baixar imagem MongoDB
 
@@ -82,7 +82,7 @@ docker pull mongodb/mongodb-community-server:latest
 docker run --name mongodb-eventos -p 27017:27017 -d mongodb/mongodb-community-server:latest
 ```
 
-### Verificar se o container esta rodando
+### Verificar se o container está rodando
 
 ```bash
 docker ps
@@ -92,13 +92,13 @@ Deve aparecer um container com o nome `mongodb-eventos` e a porta `27017`.
 
 ### Abrir o MongoDB Shell dentro do container
 
-Use este comando se voce nao tiver `mongosh` instalado no Windows:
+Use este comando se você não tiver `mongosh` instalado no Windows:
 
 ```bash
 docker exec -it mongodb-eventos mongosh
 ```
 
-Depois disso, cole os comandos das secoes `Versao 1: Embedded Relationships` e `Versao 2: Referenced Relationships`.
+Depois disso, cole os comandos das seções `Versao 1: Embedded Relationships` e `Versao 2: Referenced Relationships`.
 
 ### Abrir o MongoDB Shell pelo Windows
 
@@ -147,7 +147,7 @@ docker stop mongodb-eventos
 docker rm mongodb-eventos
 ```
 
-### Se o Docker disser que o container ja existe
+### Se o Docker disser que o container já existe
 
 Se este comando:
 
@@ -155,7 +155,7 @@ Se este comando:
 docker run --name mongodb-eventos -p 27017:27017 -d mongodb/mongodb-community-server:latest
 ```
 
-mostrar erro dizendo que o nome `mongodb-eventos` ja existe, use:
+mostrar erro dizendo que o nome `mongodb-eventos` já existe, use:
 
 ```bash
 docker start mongodb-eventos
@@ -183,38 +183,25 @@ wsl --install -d Ubuntu
 
 Depois reinicie o computador e abra o Docker Desktop novamente.
 
-### Alternativa sem Docker
-
-Se o Docker nao funcionar no dia da apresentacao, instale o MongoDB diretamente no Windows:
-
-- MongoDB Community Server
-- MongoDB Shell (`mongosh`)
-
-Depois abra o PowerShell e execute:
-
-```bash
-mongosh
-```
-
-A partir disso, os comandos MongoDB deste README continuam iguais.
+## COMANDOS
 
 ## Versao 1: Embedded Relationships
 
-Na versao embedded, os dados relacionados ficam dentro do documento principal.
+Na versão embedded, os dados relacionados ficam dentro do documento principal.
 
-Neste caso, a colecao principal sera `eventos`. Cada evento tera o organizador embutido e uma lista de palestrantes embutida.
+Neste caso, a coleção principal será `eventos`. Cada evento terá o organizador embutido e uma lista de palestrantes embutida.
 
 Vantagem: consultas mais simples para buscar evento, organizador e palestrantes juntos.
 
-Desvantagem: pode gerar duplicacao de dados, principalmente quando o mesmo palestrante participa de mais de um evento.
+Desvantagem: pode gerar duplicação de dados, principalmente quando o mesmo palestrante participa de mais de um evento.
 
-### Criar banco da versao embedded
+### Criar banco da versão embedded
 
 ```javascript
 use eventos_embedded
 ```
 
-### Criar colecao
+### Criar coleção
 
 ```javascript
 db.createCollection("eventos")
@@ -254,7 +241,7 @@ db.eventos.insertMany([
     data_evento: ISODate("2026-06-12"),
     organizador: {
       id_organizador: 1,
-      nome_organizador: "Coordenacao de Computacao",
+      nome_organizador: "Coordenação de Computação",
       email: "computacao@faculdade.edu.br"
     },
     palestrantes: [
@@ -272,12 +259,12 @@ db.eventos.insertMany([
   },
   {
     id_evento: 3,
-    nome_evento: "Encontro de Inovacao e Empreendedorismo",
+    nome_evento: "Encontro de Inovação e Empreendedorismo",
     area: "Empreendedorismo",
     data_evento: ISODate("2026-06-18"),
     organizador: {
       id_organizador: 2,
-      nome_organizador: "Nucleo de Inovacao",
+      nome_organizador: "Núcleo de Inovação",
       email: "inovacao@faculdade.edu.br"
     },
     palestrantes: [
@@ -296,13 +283,13 @@ db.eventos.insertMany([
 ])
 ```
 
-### Consulta 1 - Eventos organizados pela Coordenacao de Computacao
+### Consulta 1 - Eventos organizados pela Coordenação de Computação
 
-Esta consulta envolve `EVENTO` e `ORGANIZADOR`, com restricao pelo nome do organizador.
+Esta consulta envolve `EVENTO` e `ORGANIZADOR`, com restrição pelo nome do organizador.
 
 ```javascript
 db.eventos.find(
-  { "organizador.nome_organizador": "Coordenacao de Computacao" },
+  { "organizador.nome_organizador": "Coordenação de Computação" },
   {
     _id: 0,
     nome_evento: 1,
@@ -313,7 +300,7 @@ db.eventos.find(
 )
 ```
 
-### Consulta 2 - Eventos com palestrantes especialistas em Banco de Dados
+### Consulta 2 - Eventos com palestrantes com especialidade em Banco de Dados
 
 Esta consulta envolve `EVENTO` e `PALESTRANTE`, considerando o relacionamento `N:N`.
 
@@ -335,9 +322,9 @@ db.eventos.find(
 
 ## Versao 2: Referenced Relationships
 
-Na versao referenced, os dados ficam em colecoes separadas e os relacionamentos sao representados por IDs.
+Na versao referenced, os dados ficam em coleções separadas e os relacionamentos são representados por IDs.
 
-Neste caso, serao usadas tres colecoes:
+Neste caso, serão usadas três coleções:
 
 - `organizadores`
 - `eventos`
@@ -347,17 +334,17 @@ O relacionamento `1:N` e representado em `eventos` pelo campo `id_organizador`.
 
 O relacionamento `N:N` e representado em `eventos` pelo campo `ids_palestrantes`, que armazena uma lista com os IDs dos palestrantes participantes.
 
-Vantagem: evita duplicacao de dados.
+Vantagem: evita duplicação de dados.
 
-Desvantagem: as consultas sao mais complexas, pois precisam usar agregacao com `$lookup` para juntar informacoes de colecoes diferentes.
+Desvantagem: as consultas são mais complexas, pois precisam usar agregação com `$lookup` para juntar informações de coleções diferentes.
 
-### Criar banco da versao referenciada
+### Criar banco da versão referenciada
 
 ```javascript
 use eventos_referenced
 ```
 
-### Criar colecoes
+### Criar coleções
 
 ```javascript
 db.createCollection("organizadores")
@@ -371,12 +358,12 @@ db.createCollection("palestrantes")
 db.organizadores.insertMany([
   {
     id_organizador: 1,
-    nome_organizador: "Coordenacao de Computacao",
+    nome_organizador: "Coordenação de Computação",
     email: "computacao@faculdade.edu.br"
   },
   {
     id_organizador: 2,
-    nome_organizador: "Nucleo de Inovacao",
+    nome_organizador: "Núcleo de Inovação",
     email: "inovacao@faculdade.edu.br"
   }
 ])
@@ -415,7 +402,7 @@ db.palestrantes.insertMany([
 db.eventos.insertMany([
   {
     id_evento: 1,
-    nome_evento: "Semana Academica de Tecnologia",
+    nome_evento: "Semana Acadêmica de Tecnologia",
     area: "Tecnologia",
     data_evento: ISODate("2026-06-10"),
     id_organizador: 1,
@@ -431,7 +418,7 @@ db.eventos.insertMany([
   },
   {
     id_evento: 3,
-    nome_evento: "Encontro de Inovacao e Empreendedorismo",
+    nome_evento: "Encontro de Inovação e Empreendedorismo",
     area: "Empreendedorismo",
     data_evento: ISODate("2026-06-18"),
     id_organizador: 2,
@@ -440,9 +427,9 @@ db.eventos.insertMany([
 ])
 ```
 
-### Consulta 1 - Eventos organizados pela Coordenacao de Computacao
+### Consulta 1 - Eventos organizados pela Coordenação de Computação
 
-Esta consulta envolve `EVENTO` e `ORGANIZADOR`, com restricao pelo nome do organizador.
+Esta consulta envolve `EVENTO` e `ORGANIZADOR`, com restrição pelo nome do organizador.
 
 ```javascript
 db.eventos.aggregate([
@@ -459,7 +446,7 @@ db.eventos.aggregate([
   },
   {
     $match: {
-      "organizador.nome_organizador": "Coordenacao de Computacao"
+      "organizador.nome_organizador": "Coordenação de Computação"
     }
   },
   {
@@ -510,12 +497,12 @@ db.eventos.aggregate([
 ])
 ```
 
-## Explicacao para apresentacao
+## Explicação para apresentação
 
 A modelagem possui um relacionamento `1:N` entre `ORGANIZADOR` e `EVENTO`, pois um organizador pode organizar varios eventos, mas cada evento tem apenas um organizador.
 
 Tambem existe um relacionamento `N:N` entre `EVENTO` e `PALESTRANTE`, pois um evento pode ter varios palestrantes, e um palestrante pode participar de varios eventos.
 
-Na versao embedded, os dados do organizador e dos palestrantes ficam dentro do documento do evento. Essa abordagem facilita consultas em que o evento e sempre buscado junto com seus dados relacionados, mas pode duplicar informacoes.
+Na versão embedded, os dados do organizador e dos palestrantes ficam dentro do documento do evento. Essa abordagem facilita consultas em que o evento é sempre buscado junto com seus dados relacionados, mas pode duplicar informações.
 
-Na versao referenced, os dados ficam separados em colecoes diferentes. O evento guarda apenas o `id_organizador` e a lista `ids_palestrantes`. Essa abordagem reduz duplicacao, mas exige consultas com `$lookup` para reunir os dados relacionados.
+Na versão referenced, os dados ficam separados em coleções diferentes. O evento guarda apenas o `id_organizador` e a lista `ids_palestrantes`. Essa abordagem reduz duplicação, mas exige consultas com `$lookup` para reunir os dados relacionados.
