@@ -28,8 +28,7 @@ Relacionamentos:
 ## Modelo Conceitual
 
 
-![Modelo_Conceitual](Modelo_conceitual.png)
-
+![Modelo Conceitual](Modelo%20conceitual.png)
 
 
 ## Modelo ER
