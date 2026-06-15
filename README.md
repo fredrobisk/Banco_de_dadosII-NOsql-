@@ -25,6 +25,11 @@ Relacionamentos:
 - Todas as consultas envolvem pelo menos duas entidades e possuem restrição.
 - Pelo menos uma consulta considera o relacionamento `N:N`.
 
+## Modelo Conceitual
+
+
+
+
 ## Modelo ER
 
 ```mermaid
