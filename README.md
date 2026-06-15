@@ -77,7 +77,7 @@ Use este comando se você não tiver `mongosh` instalado no Windows:
 docker exec -it mongodb-eventos mongosh
 ```
 
-Depois disso, cole os comandos das seções `Versao 1: Embedded Relationships` e `Versao 2: Referenced Relationships`.
+Depois disso, cole os comandos das seções `versão 1: Embedded Relationships` e `versão 2: Referenced Relationships`.
 
 ### Abrir o MongoDB Shell pelo Windows
 
@@ -164,7 +164,7 @@ Depois reinicie o computador e abra o Docker Desktop novamente.
 
 ## COMANDOS
 
-## Versao 1: Embedded Relationships
+## versão 1: Embedded Relationships
 
 Na versão embedded, os dados relacionados ficam dentro do documento principal.
 
@@ -299,9 +299,9 @@ db.eventos.find(
 )
 ```
 
-## Versao 2: Referenced Relationships
+## versão 2: Referenced Relationships
 
-Na versao referenced, os dados ficam em coleções separadas e os relacionamentos são representados por IDs.
+Na versão referenced, os dados ficam em coleções separadas e os relacionamentos são representados por IDs.
 
 Neste caso, serão usadas três coleções:
 
@@ -480,7 +480,7 @@ db.eventos.aggregate([
 
 A modelagem possui um relacionamento `1:N` entre `ORGANIZADOR` e `EVENTO`, pois um organizador pode organizar varios eventos, mas cada evento tem apenas um organizador.
 
-Tambem existe um relacionamento `N:N` entre `EVENTO` e `PALESTRANTE`, pois um evento pode ter varios palestrantes, e um palestrante pode participar de varios eventos.
+Também existe um relacionamento `N:N` entre `EVENTO` e `PALESTRANTE`, pois um evento pode ter vários palestrantes, e um palestrante pode participar de vários eventos.
 
 Na versão embedded, os dados do organizador e dos palestrantes ficam dentro do documento do evento. Essa abordagem facilita consultas em que o evento é sempre buscado junto com seus dados relacionados, mas pode duplicar informações.
 
