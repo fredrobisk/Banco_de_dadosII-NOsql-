@@ -1,6 +1,6 @@
 # Sistema de Eventos Academicos - MongoDB
 
-#Alunos: Bruno Fetzer e Frederico Brigido
+Alunos: Bruno Fetzer e Frederico Brigido
 
 Este trabalho modela uma base de dados para armazenar eventos acadêmicos, seus organizadores e seus palestrantes.
 
