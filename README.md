@@ -15,17 +15,7 @@ Relacionamentos:
 - `ORGANIZADOR 1:N EVENTO`: um organizador pode organizar vários eventos, e cada evento pertence a um organizador.
 - `EVENTO N:N PALESTRANTE`: um evento pode ter vários palestrantes e um palestrante pode participar de vários eventos.
 
-## Checklist do enunciado
 
-- Modelo ER com 3 entidades.
-- Pelo menos um relacionamento `1:N`.
-- Pelo menos um relacionamento `N:N`.
-- Versão 1 usando `Embedded Relationships`.
-- Versão 2 usando `Referenced Relationships`.
-- Inserção de dados nas duas versões.
-- Duas consultas para cada versão.
-- Todas as consultas envolvem pelo menos duas entidades e possuem restrição.
-- Pelo menos uma consulta considera o relacionamento `N:N`.
 
 ## Modelo Conceitual
 
